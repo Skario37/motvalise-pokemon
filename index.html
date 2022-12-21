@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mot-valise Pokémon</title>
+        <meta charset="utf-8">
+        <script src="index.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Skario37/sylab/Syllables.js"></script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+
+    <body>
+        <form class="merge-form" action="javascript:generate()">
+            <div class="form_group">
+                <input type="text" id="word" class="word" name="word" placeholder="Ska" required>
+                <label for="word">Mot.s :</label>
+            </div>
+            <div class="form_group">
+                <input type="checkbox" id="replace" class="replace" name="replace" onclick="toggleReplace()">
+                <label for="replace">Remplacer entre syllabes :</label>
+            </div>
+            <div class="form_group">
+                <input type="text" id="group" class="group" name="group" placeholder="ska, sca, sqa, ka, ca, qa" disabled required>
+                <label for="group">Groupe.s :</label>
+            </div>
+            <div class="form_group">
+                <input value="Générer" id="submit" class="btn btn-submit" type="submit" />
+            </div>
+        </form>
+        <div class="headlist"> 
+            <input onchange="onSearchPokemon(this)" id="search" class="search" type="search" placeholder="Chercher..." autocomplete="off" autofocus required />
+            <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" />
+        </div>
+        <div id="pokemonList" class="pokemonList"></div>
+    </body>
+</html>
