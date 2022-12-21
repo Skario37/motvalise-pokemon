@@ -21,6 +21,9 @@
         <meta property="twitter:description" content="Fusionnez des mots comme une partie de votre pseudo avec ceux des Pokémon.">
         <meta property="twitter:image" content="https://raw.githubusercontent.com/Skario37/motvalise-pokemon/main/logo.png">
 
+        <!-- Icon Library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <!--  -->
         <meta name="author" content="Skario">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,8 +53,13 @@
             </div>
         </form>
         <div class="headlist"> 
-            <input onchange="onSearchPokemon(this)" id="search" class="search" type="search" placeholder="Chercher..." autocomplete="off" autofocus required />
-            <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" />
+            <div>
+                <input onchange="onSearchPokemon()" onkeypress="handle(this, event)" id="search" class="search" type="search" placeholder="Chercher un nom..." autocomplete="off" autofocus required />
+                <button onclick="onSearchPokemon()"><i class="fa fa-search"></i></button>
+            </div>
+            <div>
+                <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" />
+            </div>
         </div>
         <div id="pokemonList" class="pokemonList"></div>
     </body>

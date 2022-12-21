@@ -18,6 +18,8 @@ form {
     width: 100%;
     align-self: flex-start;
     justify-content: space-around;
+    padding-top: 10px;
+    border-top: white solid 1px;
 }
 
 .headlist form {
@@ -152,7 +154,6 @@ form.merge-form input.btn.btn-submit:focus {
     outline: 0;
     color: #e3eaf0;
     background: #38a6ef;
-    padding: 0 1.6rem;
     border-radius: 3px;
     border: none;
     padding: 10px 20px;
@@ -160,6 +161,20 @@ form.merge-form input.btn.btn-submit:focus {
 
 .headlist input[type="button"]:hover, 
 .headlist input[type="button"]:focus {
+    background: #033d6d;
+    cursor: pointer;
+}
+
+.headlist button {
+    font-size: 1.8rem;
+    color: #e3eaf0;
+    background: #38a6ef;
+    border-radius: 3px;
+    border: none;
+}
+
+.headlist button:hover, 
+.headlist button:focus {
     background: #033d6d;
     cursor: pointer;
 }
@@ -191,6 +206,10 @@ form.merge-form input.btn.btn-submit:focus {
     display: flex;
 }
 
+.pokemonList .contPokemon > div {
+    margin: 0 5px 0 5px;
+}
+
 .pokemonList .popupImg {
     margin: 2px;
     width: 60px;
@@ -204,4 +223,8 @@ form.merge-form input.btn.btn-submit:focus {
 
 .hide {
     display: none !important;
+}
+
+P.popupName {
+    font-size: smaller;
 }

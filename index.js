@@ -1095,6 +1095,11 @@ function mergeNames(first, second, pos_syl, rep_syl) {
 }
 
 function generate() {
+    const pokemonList = document.getElementById("pokemonList");
+    while (pokemonList.firstChild) {
+        pokemonList.removeChild(pokemonList.firstChild);
+    }
+
     const output = new Map();
     const first = document.getElementById("word").value;
     const replace = document.getElementById("replace").checked;
@@ -1163,8 +1168,9 @@ function createListFromMap(map) {
 }
 
 
-function onSearchPokemon(self) {
-    const str_to_search = self.value;
+function onSearchPokemon() {
+    const searchElem = document.getElementById("search");
+    const str_to_search = searchElem.value;
     const pokemonListElem = document.getElementById("pokemonList");
     for (const pokemonElem of pokemonListElem.childNodes) {
         let found = false;
@@ -1192,4 +1198,12 @@ function onRandomPokemon() {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }
+}
+
+function handle(e){
+    if (e.keyCode === 13) {
+		onSearchPokemon();
+    }
+
+	return false;
+}
