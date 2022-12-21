@@ -1103,7 +1103,8 @@ function generate() {
     const output = new Map();
     const first = document.getElementById("word").value;
     const replace = document.getElementById("replace").checked;
-    const grp = document.getElementById("group").value.split(",");
+    const grpValues = document.getElementById("group").value.split(",");
+    const grpTrim = grpValues.map(e => e.trim());
 
     let pokemon = undefined;
     let second = undefined;
@@ -1112,7 +1113,7 @@ function generate() {
         pokemon = POKEMON[i-1].replace(/(\r\n|\n|\r)/gm, "");
         second = getSyllables(pokemon);
 
-        mergedNames = mergeNames(first, second, replace, grp);
+        mergedNames = mergeNames(first, second, replace, grpTrim);
 
         if (!output.has(mergedNames)) {
             output.set(mergedNames, [{pokemon, i}])
