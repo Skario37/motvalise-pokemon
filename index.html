@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <!-- Primary Meta Tags -->
@@ -54,11 +54,11 @@
         </form>
         <div class="headlist"> 
             <div>
-                <input onchange="onSearchPokemon()" onkeypress="handle(event)" id="search" class="search" type="search" placeholder="Chercher un nom..." autocomplete="off" autofocus required />
-                <button onclick="onSearchPokemon()"><i class="fa fa-search"></i></button>
+                <input onchange="onSearchPokemon()" onkeypress="handle(event)" id="search" class="search" type="search" placeholder="Chercher un nom..." autocomplete="off" autofocus required disabled/>
+                <button onclick="onSearchPokemon()" id="search_btn" disabled><i class="fa fa-search"></i></button>
             </div>
             <div>
-                <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" />
+                <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" disabled/>
             </div>
         </div>
         <div id="pokemonList" class="pokemonList"></div>

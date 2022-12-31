@@ -9,8 +9,9 @@ body {
 }
 
 form {
-    width: 320px;
+    max-width: 100%;
     margin: 20px auto;
+    min-width: 50%;
 }
 
 .headlist {
@@ -83,7 +84,7 @@ form.merge-form .form_group input:required, form .form_group input:invalid {
     box-shadow: none;
 }
 
-form.merge-form .form_group input:disabled, form .form_group input:disabled ~ label  {
+form.merge-form .form_group input[disabled], form .form_group input[disabled] ~ label  {
     opacity: 0.3;
 }
 
@@ -180,6 +181,12 @@ form.merge-form input.btn.btn-submit:focus {
     cursor: pointer;
 }
 
+.headlist input[type="search"][disabled],
+.headlist input[type="button"][disabled],
+.headlist button[disabled] {
+    opacity: 0.3;
+    pointer-events: none;
+}
 
 
 .pokemonList {
