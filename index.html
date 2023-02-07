@@ -29,38 +29,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="favicon.ico" />
 
-        <script src="index.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/Skario37/sylab/Syllables.js"></script>
         <link rel="stylesheet" href="index.css">
     </head>
 
     <body>
-        <form class="merge-form" action="javascript:generate()">
-            <div class="form_group">
-                <input type="text" id="word" class="word" name="word" placeholder="Ska" required>
-                <label for="word">Mot.s :</label>
+      <div class="container">
+        <form id="word-form" action="javascript:generate()">
+          <div id="word-group" class="word-inputs">
+            <input class="word" type="text" name="word1" placeholder="Entrez un mot" autocomplete="off" required>
+            <div id="word-buttons" class="word-buttons">
+              <button type="button" id="add-word" class="add-word" onclick="addWord()">+</button>
+              <button type="button" id="remove-word" class="remove-word" onclick="removeWord()">-</button>
             </div>
-            <div class="form_group">
-                <input type="checkbox" id="replace" class="replace" name="replace" onclick="toggleReplace()">
-                <label for="replace">Remplacer entre syllabes :</label>
-            </div>
-            <div class="form_group">
-                <input type="text" id="group" class="group" name="group" placeholder="ska, sca, sqa, ka, ca, qa" disabled required>
-                <label for="group">Groupe.s :</label>
-            </div>
-            <div class="form_group">
-                <input value="Générer" id="submit" class="btn btn-submit" type="submit" />
-            </div>
+          </div>
+          <div class="replace-syllables">
+            <input type="checkbox" id="replace-checkbox" class="replace-checkbox" onclick="toggleReplace()">
+            <label for="replace-checkbox">Remplacer les syllabes</label>
+          </div>
+          <div>
+            <input class="group" type="text" name="group" placeholder="ska, sca, sqa, ka, ca, qa" autocomplete="off" disabled required>
+          </div>
+          <div class="generate-group">
+            <button class="generate-button" type="submit" id="generate-button">Générer</button>
+          </div>
         </form>
-        <div class="headlist"> 
-            <div>
-                <input onchange="onSearchPokemon()" onkeypress="handle(event)" id="search" class="search" type="search" placeholder="Chercher un nom..." autocomplete="off" autofocus required />
-                <button onclick="onSearchPokemon()"><i class="fa fa-search"></i></button>
-            </div>
-            <div>
-                <input onclick="onRandomPokemon()" value="Aléatoire" id="random" class="btn btn-go" type="button" />
-            </div>
+        <div class="generated-words">
+          <div class="search-bar">
+            <input type="text" id="search-input" class="search-input" placeholder="Rechercher..." onchange="onSearchPokemon()" onkeypress="handle(event)" autocomplete="off" autofocus required disabled>
+            <button type="button" id="random-button" class="random-button" onclick="onRandomPokemon()" disabled>Aléatoire</button>
+          </div>
+          <div id="pokemon-list" class="pokemon-list"></div>
         </div>
-        <div id="pokemonList" class="pokemonList"></div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/gh/Skario37/sylab/Syllables.js"></script>
+      <script src="index.js"></script>
     </body>
 </html>

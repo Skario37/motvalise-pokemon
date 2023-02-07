@@ -1,230 +1,304 @@
 body {
-    font-family: 'Poppins', sans-serif; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    background-color:#222222;
+  font-family: 'Poppins', sans-serif; 
+  font-size: 1.5rem;
+  background-color:#222222;
+  margin: 0;
+  padding: 0;
 }
 
-form {
-    width: 320px;
-    margin: 20px auto;
+.container, .word-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
 
-.headlist {
-    display: flex;
-    width: 100%;
-    align-self: flex-start;
-    justify-content: space-around;
-    padding-top: 10px;
-    border-top: white solid 1px;
+/* WORDS */
+
+input.word {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 5px 0;
+  background: transparent;
 }
 
-.headlist form {
-    margin: 0;
+.word:required, 
+.word:invalid { 
+  box-shadow: none;
 }
 
-form.merge-form .form_group {
-    position: relative;
-    padding: 15px 0 0;
-    margin-top: 20px;
+.word-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
 }
 
-form.merge-form .form_group input {
-    font-family: inherit;
-    width: 100%;
-    border: 0;
-    border-bottom: 2px solid #9b9b9b;
-    outline: 0;
-    font-size: 1.3rem;
-    color: #fff;
-    padding: 7px 0;
-    background: transparent;
-    transition: border-color 0.2s;
-    margin-top: 10px;
+.add-word, 
+.remove-word {
+  font-size: 1.3rem;
+  flex-grow: 1;
+  color: #222222;
+  border-radius: 3px;
+  border: 1px #222222 solid;
+  margin: 10px 20px;
 }
 
-form.merge-form .form_group input[type="checkbox"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #222222;
-    font: inherit;
-    color: #9b9b9b;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid #9b9b9b;
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    margin: 0;
-    display: grid;
-    place-content: center;
-    position: absolute;
-    top: 0;
-    right: 0;
+.add-word:hover, 
+.add-word:focus {
+  color: steelblue;
+  background-color: #222222;
+  border: 1px steelblue solid;
+  cursor: pointer;
 }
 
-form.merge-form .form_group input[type="checkbox"]::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em #38a6ef;
+.remove-word:hover,
+.remove-word:focus {
+  color: indianred;
+  background-color: #222222;
+  border: 1px indianred solid;
+  cursor: pointer;
 }
 
-form.merge-form .form_group input[type="checkbox"]:checked::before {
-    transform: scale(1);
+.add-word {
+  background-color: steelblue;
+}
+.remove-word {
+  background-color: indianred;
 }
 
-form.merge-form .form_group input:required, form .form_group input:invalid { 
-    box-shadow: none;
+/* CHECKBOX */
+.replace-syllables {
+  position: relative;
 }
 
-form.merge-form .form_group input:disabled, form .form_group input:disabled ~ label  {
-    opacity: 0.3;
+.replace-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #222222;
+  font: inherit;
+  color: #9b9b9b;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #9b9b9b;
+  border-radius: 0.15em;
+  margin: -5px 0;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
-form.merge-form .form_group input:focus ~ label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #38a6ef;
-    font-weight: 700;
+.replace-checkbox:not(:disabled):hover,
+.replace-checkbox:not(:disabled):focus {
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #9b9b9b
 }
 
-form.merge-form .form_group input:focus {
-    padding-bottom: 6px;
-    font-weight: 700;
-    border-width: 3px;
-    border-image: linear-gradient(to right, #38a6ef, #38a6ef);
-    border-image-slice: 1;
+.replace-checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #38a6ef;
 }
 
-form.merge-form .form_group label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1.3rem;
-    color: #9b9b9b;
+.replace-checkbox:checked::before {
+  transform: scale(1);
 }
 
-form.merge-form input.btn {
-    background: #fff;
-    color: #9b9b9b;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    outline: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+.replace-checkbox:disabled, 
+.replace-checkbox:disabled ~ label  {
+  opacity: 0.3;
 }
 
-form.merge-form input.btn.btn-submit {
-    background: #38a6ef;
-    color: #e3eaf0;
+.replace-checkbox ~ label {
+  font-size: 1.3rem;
+  color: #fff;
 }
 
-form.merge-form input.btn.btn-submit:hover,
-form.merge-form input.btn.btn-submit:focus {
-    background: #033d6d;
-    cursor: pointer;
+/* GROUP */
+
+.group {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 5px 0;
+  background: transparent;
 }
 
-.headlist input[type="search"] {
-    height: 2rem;
-    border: 0;
-    font-size: 1.8rem;
-    
-    color: #303030;
-    background: whitesmoke;
-    padding: 1.2rem 1.6rem;
-    border-radius: 3px;
+.group:disabled {
+  opacity: 0.3;
 }
 
-.headlist input[type="button"] {
-    font-size: 1.3rem;
-    outline: 0;
-    color: #e3eaf0;
-    background: #38a6ef;
-    border-radius: 3px;
-    border: none;
-    padding: 10px 20px;
+/* GENERATE */
+.generate-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
 }
 
-.headlist input[type="button"]:hover, 
-.headlist input[type="button"]:focus {
-    background: #033d6d;
-    cursor: pointer;
+.generate-button {
+  font-size: 1.3rem;
+  flex-grow: 1;
+  color: #222222;
+  background: palegreen;
+  border-radius: 3px;
+  border: none;
+  margin: 10px 20px;
 }
 
-.headlist button {
-    font-size: 1.8rem;
-    color: #e3eaf0;
-    background: #38a6ef;
-    border-radius: 3px;
-    border: none;
+.generate-button:hover,
+.generate-button:focus {
+  color: palegreen;
+  background-color: #222222;
+  border: 1px palegreen solid;
+  cursor: pointer;
 }
 
-.headlist button:hover, 
-.headlist button:focus {
-    background: #033d6d;
-    cursor: pointer;
+/*  */
+
+.generated-words {
+  width: 100%;
+  border-top: white solid 1px;
+  text-align: center;
 }
 
-
-
-.pokemonList {
-    width: 100%;
-    overflow: auto;
-    text-align: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10%, 20%));
+.search-bar {
+  padding-top: 10px;
 }
 
-.pokemonList .popupPokemon {
-    display: flex;
-    margin: 2px 10px 2px 10px;
-    flex-direction: column;
-    align-items: center;
-    background: whitesmoke;
-    border: 1px solid #e6e6e6;
+.search-input {
+  border: 0;
+  font-size: 1.3rem;
+  color: #222222;
+  background: whitesmoke;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 450px;
+  padding: 5px;
 }
 
-.pokemonList .popupPokemon.duplicate {
-    background-color:sandybrown;
+.search-input:disabled {
+  opacity: 0.3;
 }
 
-.pokemonList .contPokemon {
-    display: flex;
+.random-button {
+  font-size: 1.3rem;
+  color: #222222;
+  background:mediumpurple;
+  border-radius: 3px;
+  border: 1px solid #222222;
+  margin: 10px 20px;
+  padding: 5px;
 }
 
-.pokemonList .contPokemon > div {
-    margin: 0 5px 0 5px;
+.random-button:not(:disabled):hover,
+.random-button:not(:disabled):focus {
+  color: mediumpurple;
+  background-color: #222222;
+  border: 1px mediumpurple solid;
+  cursor: pointer;
 }
 
-.pokemonList .popupImg {
-    margin: 2px;
-    width: 60px;
-    height: 60px;
+.random-button:disabled {
+  opacity: 0.3;
 }
 
-.pokemonList .popupImg img {
-    max-width: 100%;
-    height: auto;
+.pokemon-list {
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10%);
+}
+
+.pokemon-list .popupPokemon {
+  display: flex;
+  margin: 2px 10px 2px 10px;
+  flex-direction: column;
+  align-items: center;
+  background: whitesmoke;
+  border: 1px solid #e6e6e6;
+}
+
+.pokemon-list .popupPokemon.duplicate {
+  background-color:sandybrown;
+}
+
+.pokemon-list .contPokemon {
+  display: flex;
+}
+
+.pokemon-list .contPokemon > div {
+  margin: 0 5px 0 5px;
+}
+
+.pokemon-list .popupImg {
+  margin: 2px;
+  width: 60px;
+  height: 60px;
+}
+
+.pokemon-list .popupImg img {
+  max-width: 100%;
+  height: auto;
 }
 
 .hide {
-    display: none !important;
+  display: none !important;
 }
 
-P.popupName {
-    font-size: smaller;
+p.popupName {
+  font-size: smaller;
 }
+
+p.username {
+  width: 100%;
+}
+
+@media only screen and (max-width: 320px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, 100%);
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, 100%);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 640px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, minmax(50%, 100%));
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 800px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, minmax(33%, 50%));
+  }
+}
+@media only screen and (min-width: 800px) and (max-width: 1024px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, minmax(25%, 33%));
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, minmax(20%, 25%));
+  }
+}
+@media only screen and (min-width: 1280px) and (max-width: 1920px) {
+  .pokemon-list {
+      grid-template-columns: repeat(auto-fit, minmax(10%, 20%));
+  }
+}
+

@@ -1007,12 +1007,49 @@ const POKEMON = [
     "Garde-de-Fer",
     "Koraidon",
     "Miraidon"
-]
+];
+const wordInputs = [document.getElementsByName("word1")[0]];
+const wordGroup = document.getElementById("word-group");
+const wordButtons = document.getElementById("word-buttons");
+const replaceCheckbox = document.getElementById("replace-checkbox");
+const groupInput = document.getElementsByName("group")[0];
+const generateButton = document.getElementById("generate-button");
+const searchInput = document.getElementById("search-input");
+const randomButton = document.getElementById("random-button");
+const pokemonList = document.getElementById("pokemon-list");
 
 function toggleReplace() {
-    let grpElem = document.getElementById("group");
-    grpElem.disabled = !grpElem.disabled;
+    groupInput.disabled = !replaceCheckbox.checked;
 }
+
+function addWord() {
+    const newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.name = `word${wordInputs.length + 1}`;
+    newInput.classList.add("word");
+    newInput.placeholder = "Entrez un mot";
+    newInput.required = true;
+    wordInputs.push(newInput);
+    wordGroup.insertBefore(newInput, wordButtons);
+
+    if (wordInputs.length > 1) {
+        replaceCheckbox.disabled = true;
+        replaceCheckbox.checked = false;
+        groupInput.disabled = true;
+    }
+};
+
+function removeWord() {
+    if (wordInputs.length > 1) {
+        const lastInput = wordInputs.pop();
+        wordGroup.removeChild(lastInput);
+    } 
+    if (wordInputs.length === 1) {
+        replaceCheckbox.disabled = false;
+    }
+};
+    
+    
 
 function mergeNames(first, second, pos_syl, rep_syl) {
     let ret = "";
@@ -1073,7 +1110,7 @@ function mergeNames(first, second, pos_syl, rep_syl) {
                 else secondChars[0] = secondChars[0].substring(1);
             }
 
-            secondFirstChar = secondChars[0][0].toLowerCase();
+            secondFirstChar = (secondChars[0][0]||"").toLowerCase();
             normalizedSFC = secondFirstChar.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         } 
 
@@ -1095,25 +1132,41 @@ function mergeNames(first, second, pos_syl, rep_syl) {
 }
 
 function generate() {
-    const pokemonList = document.getElementById("pokemonList");
-    while (pokemonList.firstChild) {
-        pokemonList.removeChild(pokemonList.firstChild);
-    }
+    searchInput.disabled = false;
+    randomButton.disabled = false;
+    pokemonList.replaceChildren();
 
     const output = new Map();
-    const first = document.getElementById("word").value;
-    const replace = document.getElementById("replace").checked;
-    const grpValues = document.getElementById("group").value.split(",");
+    const replace = replaceCheckbox.checked;
+    const grpValues = groupInput.value.split(",");
     const grpTrim = grpValues.map(e => e.trim());
 
     let pokemon = undefined;
     let second = undefined;
     let mergedNames = undefined;
+    let name = "";
     for (let i = 1; i <= POKEMON.length; i++) {
         pokemon = POKEMON[i-1].replace(/(\r\n|\n|\r)/gm, "");
         second = getSyllables(pokemon);
-
-        mergedNames = mergeNames(first, second, replace, grpTrim);
+        
+        mergedNames = "";
+        for (let j = 0; j < wordInputs.length; j++) {
+            let slength = second.length;
+            name = mergeNames(wordInputs[j].value, second, replace, grpTrim);
+            if (slength === second.length) {
+                second.shift();
+            }
+            mergedNames += name.slice(0, name.length - (second.join("")).length);
+            
+            if (j >= wordInputs.length-1
+            ||  second.length === 1 && second[0].length < 3
+            ||  second.length === 0) {
+                mergedNames += second.join("");
+                break;
+            } else {
+                mergedNames += " ";
+            }
+        }
 
         if (!output.has(mergedNames)) {
             output.set(mergedNames, [{pokemon, i}])
@@ -1128,11 +1181,10 @@ function generate() {
 }
 
 function createListFromMap(map) {
-    const pokemonList = document.getElementById("pokemonList");
-
     let divPopContPok,
         pName,
         divContPok;
+
     map.forEach((value, key) => { 
         divPopContPok = document.createElement("div");
         pName = document.createElement("p");
@@ -1155,6 +1207,7 @@ function createListFromMap(map) {
 
             divPopImg.classList.add("popupImg");
             img.src = "./assets/" + el.i + ".png";
+            img.loading = "lazy";
             p.classList.add("popupName");
             p.innerText = el.pokemon;
         }
@@ -1170,10 +1223,8 @@ function createListFromMap(map) {
 
 
 function onSearchPokemon() {
-    const searchElem = document.getElementById("search");
-    const str_to_search = searchElem.value;
-    const pokemonListElem = document.getElementById("pokemonList");
-    for (const pokemonElem of pokemonListElem.childNodes) {
+    const str_to_search = searchInput.value;
+    for (const pokemonElem of pokemonList.childNodes) {
         let found = false;
         const nameListElem = pokemonElem.querySelectorAll("p");
         for (let nameElem of nameListElem) {
@@ -1189,11 +1240,10 @@ function onSearchPokemon() {
 }
 
 function onRandomPokemon() {
-    const pokemonListElem = document.getElementById("pokemonList");
-    const rand = getRandomInt(pokemonListElem.childNodes.length);
-    for (let i = 0; i < pokemonListElem.childNodes.length; i++) {
-        if (i !== rand) pokemonListElem.childNodes[i].classList.add("hide");
-        else pokemonListElem.childNodes[i].classList.remove("hide");
+    const rand = getRandomInt(pokemonList.childNodes.length);
+    for (let i = 0; i < pokemonList.childNodes.length; i++) {
+        if (i !== rand) pokemonList.childNodes[i].classList.add("hide");
+        else pokemonList.childNodes[i].classList.remove("hide");
     }
 }
 
