@@ -1131,6 +1131,12 @@ function mergeNames(first, second, pos_syl, rep_syl) {
     return ret;
 }
 
+function enableSearchFcts() {
+    document.getElementById("search").disabled = false;
+    document.getElementById("search_btn").disabled = false;
+    document.getElementById("random").disabled = false;
+}
+
 function generate() {
     searchInput.disabled = false;
     randomButton.disabled = false;
